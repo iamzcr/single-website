@@ -10,9 +10,9 @@
           </div>
         </div>
         <div class="footer-links">
-          <a href="#" @click.prevent>安装插件</a>
+          <a :href="installUrl()" target="_blank" rel="noopener noreferrer">安装插件</a>
           <a href="#" @click.prevent>隐私说明</a>
-          <a href="#" @click.prevent>GitHub</a>
+          <a href="https://github.com/iamzcr/call-my-ai-worker" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -24,6 +24,7 @@
 </template>
 
 <script setup>
+import { installUrl } from '@/utils/install'
 import logo from '@/assets/logo.png'
 </script>
 

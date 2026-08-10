@@ -12,7 +12,7 @@
         各站点实时展示与生成，省去来回切换。
       </p>
       <div class="hero-actions">
-        <a class="btn-primary" href="#" @click.prevent>安装到浏览器</a>
+        <a class="btn-primary" :href="installUrl()" target="_blank" rel="noopener noreferrer">安装到浏览器</a>
         <a class="btn-ghost" href="#" @click.prevent="goHow">查看使用教程 ↓</a>
       </div>
       <div class="hero-note">支持国内 / 海外多站点 · 默认勾选常用国内站点</div>
@@ -67,6 +67,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { scrollTo } from '@/router'
+import { installUrl } from '@/utils/install'
 
 const demoImages = ['demo/1.png', 'demo/2.png']
 const current = ref(0)

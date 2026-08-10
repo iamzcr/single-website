@@ -4,13 +4,14 @@
       <div class="cta-glow"></div>
       <h2 class="cta-title">一次提问，省下无数次来回切换</h2>
       <p class="cta-sub">安装 Call My AI Worker，让多个 AI 同时为你回答</p>
-      <a class="cta-btn" href="#" @click.prevent>安装插件</a>
+      <a class="cta-btn" :href="installUrl()" target="_blank" rel="noopener noreferrer">安装插件</a>
       <div class="cta-note">免费 · 本地运行 · 无数据收集</div>
     </div>
   </section>
 </template>
 
 <script setup>
+import { installUrl } from '@/utils/install'
 </script>
 
 <style scoped>

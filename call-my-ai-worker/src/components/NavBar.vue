@@ -17,7 +17,18 @@
             @click.prevent="goTo(item.href)"
           >{{ item.label }}</a>
         </nav>
-        <a class="install-btn" href="#" @click.prevent>
+        <a
+          class="nav-link github-link"
+          href="https://github.com/iamzcr/call-my-ai-worker"
+          target="_blank"
+          rel="noopener noreferrer"
+        >GitHub</a>
+        <a
+          class="install-btn"
+          :href="installUrl()"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <span class="shine"></span>
           <span class="install-dot"></span>安装插件
         </a>
@@ -29,6 +40,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { scrollTo } from '@/router'
+import { installUrl } from '@/utils/install'
 import logo from '@/assets/logo.png'
 
 const scrolled = ref(false)
@@ -162,6 +174,10 @@ const links = [
   color: var(--primary);
   background: var(--primary-soft);
   font-weight: 600;
+}
+
+.github-link {
+  text-decoration: none;
 }
 
 /* install button */
