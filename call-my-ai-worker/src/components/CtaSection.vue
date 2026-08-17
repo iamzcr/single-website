@@ -2,16 +2,38 @@
   <section class="cta">
     <div class="cta-inner reveal" v-reveal>
       <div class="cta-glow"></div>
-      <h2 class="cta-title">一次提问，省下无数次来回切换</h2>
-      <p class="cta-sub">安装 Call My AI Worker，让多个 AI 同时为你回答</p>
-      <a class="cta-btn" :href="installUrl()" target="_blank" rel="noopener noreferrer">安装插件</a>
-      <div class="cta-note">免费 · 本地运行 · 无数据收集</div>
+      <h2 class="cta-title">支持与交流</h2>
+      <p class="cta-sub">如果这个项目对你有帮助，欢迎赞赏支持；也可以加入 QQ 群一起交流反馈</p>
+      <div class="cta-cards">
+        <div class="cta-card">
+          <p class="cta-card-title">赞赏支持</p>
+          <p class="cta-card-desc">扫一扫，支持作者 ☕</p>
+          <img class="cta-qr" src="/iamzcr.png" alt="赞赏码" @click="preview = '/iamzcr.png'" />
+        </div>
+        <div class="cta-card">
+          <p class="cta-card-title">QQ 交流群</p>
+          <p class="cta-card-desc">加入群聊，一起交流反馈</p>
+          <img class="cta-qr" src="/qrcode.jpg" alt="QQ群二维码" @click="preview = '/qrcode.jpg'" />
+        </div>
+      </div>
+      <p class="cta-hint">👆 点击二维码可放大，扫码更清晰</p>
     </div>
+
+    <Teleport to="body">
+      <div v-if="preview" class="qr-overlay" @click.self="preview = ''">
+        <div class="qr-overlay-box">
+          <img class="qr-overlay-img" :src="preview" alt="二维码大图" />
+          <p class="qr-overlay-tip">长按识别或使用手机扫码</p>
+        </div>
+      </div>
+    </Teleport>
   </section>
 </template>
 
 <script setup>
-import { installUrl } from '@/utils/install'
+import { ref } from 'vue'
+
+const preview = ref('')
 </script>
 
 <style scoped>
@@ -51,29 +73,85 @@ import { installUrl } from '@/utils/install'
   position: relative;
   color: rgba(255, 255, 255, 0.85);
   font-size: 16px;
-  margin: 0 0 32px;
+  margin: 0 0 40px;
 }
-.cta-btn {
+.cta-cards {
   position: relative;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.cta-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
   background: #fff;
-  color: var(--primary);
-  padding: 13px 34px;
-  border-radius: 999px;
-  font-size: 16px;
+  border-radius: 20px;
+  padding: 24px 28px 28px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18);
+  min-width: 200px;
+}
+.cta-card-title {
+  color: var(--text);
+  font-size: 17px;
   font-weight: 700;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.2);
-  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  margin: 0;
 }
-.cta-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.28);
+.cta-card-desc {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin: 0 0 4px;
 }
-.cta-note {
+.cta-qr {
+  width: 180px;
+  height: 180px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  object-fit: contain;
+  background: #fff;
+  cursor: zoom-in;
+  transition: transform 0.2s var(--ease);
+}
+.cta-qr:hover {
+  transform: scale(1.03);
+}
+.cta-hint {
   position: relative;
-  margin-top: 20px;
+  margin-top: 24px;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.75);
+}
+.qr-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+.qr-overlay-box {
+  background: #fff;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  max-width: 90vw;
+}
+.qr-overlay-img {
+  display: block;
+  width: min(70vw, 360px);
+  height: auto;
+  border-radius: 12px;
+}
+.qr-overlay-tip {
+  margin: 14px 0 0;
+  font-size: 14px;
+  color: var(--text-muted);
 }
 @media (max-width: 768px) {
   .cta {
@@ -84,6 +162,10 @@ import { installUrl } from '@/utils/install'
   }
   .cta-title {
     font-size: 26px;
+  }
+  .cta-cards {
+    flex-direction: column;
+    align-items: center;
   }
 }
 </style>
